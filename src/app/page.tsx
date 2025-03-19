@@ -80,6 +80,9 @@ export default function Home() {
   const handleSubmit = async () => {
     if (!query.trim()) return;
 
+    const currentQuery = query;
+    setQuery('');
+
     setResponses(prev => 
       prev.map(response => ({
         ...response,
@@ -91,19 +94,19 @@ export default function Home() {
     const apiCalls = [
       { 
         index: 0, 
-        promise: queryOpenAI(query, configs[0].selectedModel)
+        promise: queryOpenAI(currentQuery, configs[0].selectedModel)
       },
       { 
         index: 1, 
-        promise: queryGemini(query, configs[1].selectedModel)
+        promise: queryGemini(currentQuery, configs[1].selectedModel)
       },
       { 
         index: 2, 
-        promise: queryClaude(query, configs[2].selectedModel)
+        promise: queryClaude(currentQuery, configs[2].selectedModel)
       },
       { 
         index: 3, 
-        promise: queryDeepseek(query, configs[3].selectedModel)
+        promise: queryDeepseek(currentQuery, configs[3].selectedModel)
       }
     ];
 

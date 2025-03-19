@@ -3,7 +3,7 @@
 import { LLMConfig } from '@/types';
 import dynamic from 'next/dynamic';
 import { Send } from 'lucide-react';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { CSSObjectWithLabel } from 'react-select';
 
 const Select = dynamic(() => import('react-select'), {
@@ -52,12 +52,6 @@ export function QueryInput({
     }
   };
 
-  useEffect(() => {
-    if (!loading) {
-      inputRef.current?.focus();
-    }
-  }, [loading]);
-
   return (
     <div className="w-full max-w-6xl mx-auto space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -92,7 +86,6 @@ export function QueryInput({
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Enter your prompt here..."
           className="w-full px-4 py-3 pr-12 text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-          disabled={loading}
           autoFocus
         />
         <button
