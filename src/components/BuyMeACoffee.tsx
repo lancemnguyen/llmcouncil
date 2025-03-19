@@ -5,7 +5,7 @@ export function BuyMeACoffee() {
         href="https://www.buymeacoffee.com/lancen"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+        className="inline-flex items-center px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
       >
         <img
           src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"

@@ -4,7 +4,7 @@ import { LLMConfig } from '@/types';
 import dynamic from 'next/dynamic';
 import { Send } from 'lucide-react';
 import { useRef, useEffect } from 'react';
-import { CSSObjectWithLabel, ActionMeta } from 'react-select';
+import { CSSObjectWithLabel } from 'react-select';
 
 const Select = dynamic(() => import('react-select'), {
   ssr: false
@@ -32,10 +32,6 @@ const selectStyles = {
     ...base,
     color: '#111827',
   }),
-  menu: (base: CSSObjectWithLabel) => ({
-    ...base,
-    backgroundColor: 'white',
-  }),
 };
 
 export function QueryInput({
@@ -56,12 +52,6 @@ export function QueryInput({
     }
   };
 
-  // Focus the input when the component mounts
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
-
-  // Focus the input when loading state changes
   useEffect(() => {
     if (!loading) {
       inputRef.current?.focus();
@@ -81,7 +71,7 @@ export function QueryInput({
               instanceId={`model-select-${index}`}
               options={config.models}
               value={config.models.find(m => m.value === config.selectedModel)}
-              onChange={(option: unknown, _actionMeta: ActionMeta<unknown>) => {
+              onChange={(option: unknown) => {
                 if (option && typeof option === 'object' && 'value' in option) {
                   onModelChange(config.name, (option as { value: string }).value);
                 }
