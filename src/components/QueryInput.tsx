@@ -86,6 +86,7 @@ export function QueryInput({
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Enter your prompt here..."
           className="w-full px-4 py-3 pr-12 text-gray-900 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          disabled={loading}
           autoFocus
         />
         <button
