@@ -4,6 +4,7 @@ import { LLMConfig } from '@/types';
 import dynamic from 'next/dynamic';
 import { Send } from 'lucide-react';
 import { useRef, useEffect } from 'react';
+import { CSSObjectWithLabel, ActionMeta } from 'react-select';
 
 const Select = dynamic(() => import('react-select'), {
   ssr: false
@@ -19,7 +20,7 @@ interface QueryInputProps {
 }
 
 const selectStyles = {
-  option: (base: any, state: { isSelected: boolean }) => ({
+  option: (base: CSSObjectWithLabel, state: { isSelected: boolean }) => ({
     ...base,
     color: state.isSelected ? 'white' : '#111827',
     backgroundColor: state.isSelected ? '#2563eb' : 'white',
@@ -27,11 +28,11 @@ const selectStyles = {
       backgroundColor: state.isSelected ? '#2563eb' : '#f3f4f6',
     },
   }),
-  singleValue: (base: any) => ({
+  singleValue: (base: CSSObjectWithLabel) => ({
     ...base,
     color: '#111827',
   }),
-  menu: (base: any) => ({
+  menu: (base: CSSObjectWithLabel) => ({
     ...base,
     backgroundColor: 'white',
   }),
@@ -80,7 +81,11 @@ export function QueryInput({
               instanceId={`model-select-${index}`}
               options={config.models}
               value={config.models.find(m => m.value === config.selectedModel)}
-              onChange={(option: any) => option && onModelChange(config.name, option.value)}
+              onChange={(option: unknown, _actionMeta: ActionMeta<unknown>) => {
+                if (option && typeof option === 'object' && 'value' in option) {
+                  onModelChange(config.name, (option as { value: string }).value);
+                }
+              }}
               isDisabled={loading}
               className="text-sm"
               styles={selectStyles}
