@@ -1,7 +1,13 @@
+'use client';
+
 import { LLMConfig } from '@/types';
-import Select from 'react-select';
+import dynamic from 'next/dynamic';
 import { Send } from 'lucide-react';
 import { useRef, useEffect } from 'react';
+
+const Select = dynamic(() => import('react-select'), {
+  ssr: false
+});
 
 interface QueryInputProps {
   query: string;
@@ -64,16 +70,17 @@ export function QueryInput({
   return (
     <div className="w-full max-w-6xl mx-auto space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {configs.map((config) => (
+        {configs.map((config, index) => (
           <div key={config.name} className="space-y-2">
             <div className="flex items-center space-x-2">
               <img src={config.icon} alt={config.name} className="w-6 h-6" />
               <span className="text-sm font-medium text-gray-700">{config.name}</span>
             </div>
             <Select
+              instanceId={`model-select-${index}`}
               options={config.models}
               value={config.models.find(m => m.value === config.selectedModel)}
-              onChange={(option) => option && onModelChange(config.name, option.value)}
+              onChange={(option: any) => option && onModelChange(config.name, option.value)}
               isDisabled={loading}
               className="text-sm"
               styles={selectStyles}
