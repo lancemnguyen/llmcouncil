@@ -12,7 +12,7 @@ export function BuyMeACoffee() {
           alt="Buy me a coffee"
           className="h-4 w-4 mr-2"
         />
-        Buy me a coffee
+        Donations are appreciated!
       </a>
     </div>
   );
