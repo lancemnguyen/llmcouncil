@@ -162,7 +162,11 @@ export default function Home() {
           ))}
         </div>
 
-        <BuyMeACoffee />
+        <div className="text-center text-xs sm:text-sm text-gray-500">
+          <BuyMeACoffee />
+          <br />
+          <p>© {new Date().getFullYear()} Lance Nguyen</p>
+        </div>
       </div>
     </div>
   );
